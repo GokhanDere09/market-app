@@ -5,7 +5,7 @@ import json
 import re
 
 # Senin API Anahtarın
-GEMINI_API_KEY = "AIzaSyAsq7410QuaYeOWE3kNojLTo3mzoZwcF0I"
+GEMINI_API_KEY = ""
 
 def get_nutrition(product_name: str):
     try:
