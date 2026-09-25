@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DB session
+
 def get_db():
     db = SessionLocal() #db oturumu oluşturur
     try:
@@ -28,7 +28,6 @@ def get_db():
         db.close()
 
 
-# CREATE 
 @app.post("/products") #post isteği geldiğinde bu fonksiyon çalışır
 def create_product(product: ProductCreate, db: Session = Depends(get_db)): #frontend verisini alır db ye ver 
     # Aynı isimde ve silinmemiş ürün var mı kontrolü
@@ -54,13 +53,11 @@ def create_product(product: ProductCreate, db: Session = Depends(get_db)): #fron
     return new_product
         
 
-# READ ALL
 @app.get("/products")
 def get_products(db: Session = Depends(get_db)):
     return db.query(Product).filter(Product.is_deleted == False).all()
 
 
-# READ ONE
 @app.get("/products/{product_id}")
 def get_product(product_id: int, db: Session = Depends(get_db)):
     product = db.query(Product).filter(Product.id == product_id).first()
@@ -69,7 +66,7 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
     return product
 
 
-# UPDATE
+
 @app.put("/products/{product_id}")
 def update_product(product_id: int, updated: ProductCreate, db: Session = Depends(get_db)):
     product = db.query(Product).filter(Product.id == product_id).first()# güncellenecek ürünü bulur
@@ -100,7 +97,7 @@ def update_product(product_id: int, updated: ProductCreate, db: Session = Depend
     return product #güncellenmiş ürünü döndürür
 
 
-# DELETE
+
 @app.delete("/products/{product_id}")
 def delete_product(product_id: int, db: Session = Depends(get_db)):
     product = db.query(Product).filter(Product.id == product_id).first()
@@ -115,7 +112,6 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
     return {"message": "Ürün silindi (soft delete)"}
 
 
-# AI NUTRITION (CACHE VAR)
 @app.get("/products/{product_id}/nutrition")
 def product_nutrition(product_id: int, db: Session = Depends(get_db)):
     product = db.query(Product).filter(Product.id == product_id).first()
