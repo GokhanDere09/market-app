@@ -1,0 +1,12 @@
+FRONTEND:
+cd C:\Users\dereg\OneDrive\Desktop\marketapp\frontend
+npm run dev
+
+
+BACKEND:
+KÜTÜPHANE: pip install fastapi uvicorn requests sqlalchemy
+cd C:\Users\dereg\OneDrive\Desktop\marketapp\backend
+python -m venv venv
+venv\Scripts\activate
+uvicorn main:app --reload
+http://127.0.0.1:8000/docs
