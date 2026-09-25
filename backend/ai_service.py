@@ -4,12 +4,12 @@ import requests
 import json
 import re
 
-# Senin API Anahtarın
+
 GEMINI_API_KEY = ""
 
 def get_nutrition(product_name: str):
     try:
-        # 2026'nın en yüksek kotalı ve ücretsiz (billing gerektirmeyen) modeli
+        
         model_name = "gemini-3.1-flash-lite-preview"
 
         url = (
@@ -33,7 +33,7 @@ def get_nutrition(product_name: str):
         data = response.json()
         res_text = data['candidates'][0]['content']['parts'][0]['text'].strip()
         
-        # Markdown temizleme
+       
         clean_json = re.sub(r"```json|```", "", res_text).strip()
         
         return json.loads(clean_json)
